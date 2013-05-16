@@ -1,4 +1,6 @@
 ( function ( _ ) {
+  'use strict';
+
   _.mixin({
     // remove spaces and make lowercase
     slug: function( string ) {
@@ -50,6 +52,30 @@
       });
 
       return ret;
+    },
+
+    // from http://www.josscrowcroft.com/2011/code/format-unformat-money-currency-javascript/
+    // by default formats money as USD with 2 decimal places
+    dollar: function( number, places, symbol, thousand, decimal ) {
+      number = number || 0;
+      places = !isNaN(places = Math.abs(places)) ? places : 2;
+      symbol = symbol !== undefined ? symbol : "$";
+      thousand = thousand || ",";
+      decimal = decimal || ".";
+
+      var negative = number < 0 ? "-" : "",
+
+      i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+      j = (j = i.length) > 3 ? j % 3 : 0;
+
+      return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
+    },
+
+    // console.log replacement
+    log: function() {
+      if ( window.console ) {
+        console.log.apply( console, arguments );
+      }
     }
   });
 })( _ );

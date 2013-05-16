@@ -2,13 +2,33 @@
   'use strict';
 
   _.mixin({
-    // remove spaces and make lowercase
-    slug: function( string ) {
+    // replace spaces with underscores and make lowercase
+    slugify: function( string ) {
       return string.replace( / /g, '_' ).toLowerCase();
     },
 
+    // replace spaces with dashes and make lowercase
+    dashify: function( string ) {
+      return string.replace( / /g, '-' ).toLowerCase();
+    },
+
+    // remove all spaces
+    noSpace: function( string ) {
+      return string.replace( /[^A-Za-z0-9]/g, '' );
+    },
+
+    // lowercase a string
+    lower: function( string ) {
+      return string.toLowerCase();
+    },
+
+    // uppercase a string
+    upper: function( string ) {
+      return string.toUpperCase();
+    },
+
     // adapted from https://github.com/gouch/to-title-case
-    titleCase: function ( title, upper ) {
+    titleCase: function( title, upper ) {
       var smallWords = /^(a|an|and|as|at|block|but|by|en|for|if|in|near|of|on|or|the|to|vs?\.?|via|with)$/i;
 
       if ( title ) {

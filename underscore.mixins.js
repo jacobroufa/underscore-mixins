@@ -96,6 +96,11 @@
       if ( window.console ) {
         console.log.apply( console, arguments );
       }
+    },
+
+    // return a summary of the string of X-word length
+    summary: function( string, len ) {
+      return string.split( ' ' ).length > len ? string.split( ' ', len ).join( ' ' ) + '...' : string;
     }
   });
 })( _ );
